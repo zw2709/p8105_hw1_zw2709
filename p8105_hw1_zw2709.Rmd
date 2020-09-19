@@ -60,9 +60,66 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0))) * pull(prob1_df, samp)
 
 # Problem 2
 
+This is infomation about the dataset.
+
+```{r dataset_penguins}
+data("penguins", package = "palmerpenguins")
+summary(penguins)
+```
 
 
 
+### Variables
+The dataset penguins has eight variables, and the variable names are `r names(penguins)`.
 
+
+
+There are three factors in total: 'species','island', 'sex'.
+
+* The variable 'species' has three levels: `r levels(pull(penguins, species))`.
+* The variable 'island' has three levels: `r levels(pull(penguins, island))`.
+* The variable 'sex' has three levels: `r levels(pull(penguins, sex))`.
+
+
+
+The other five variables have numerical values.
+
+* The variable 'bill_length_mm' has the range: [`r range(pull(penguins, bill_length_mm), na.rm = TRUE)`], the minimum value: `r min(pull(penguins, bill_length_mm), na.rm = TRUE)`, the maximum value: `r max(pull(penguins, bill_length_mm), na.rm = TRUE)`, the mean value: `r mean(pull(penguins, bill_length_mm), na.rm = TRUE)`.
+
+* The variable 'bill_depth_mm' has the range: [`r range(pull(penguins, bill_depth_mm), na.rm = TRUE)`], the minimum value: `r min(pull(penguins, bill_depth_mm), na.rm = TRUE)`, the maximum value: `r max(pull(penguins, bill_depth_mm), na.rm = TRUE)`, the mean value: `r mean(pull(penguins, bill_depth_mm), na.rm = TRUE)`.
+
+* The variable 'flipper_length_mm' has the range: [`r range(pull(penguins, flipper_length_mm), na.rm = TRUE)`], the minimum value: `r min(pull(penguins, flipper_length_mm), na.rm = TRUE)`, the maximum value: `r max(pull(penguins, flipper_length_mm), na.rm = TRUE)`, the mean value: `r mean(pull(penguins, flipper_length_mm), na.rm = TRUE)`.
+
+* The variable 'body_mass_g' has the range: [`r range(pull(penguins, body_mass_g), na.rm = TRUE)`], the minimum value: `r min(pull(penguins, body_mass_g), na.rm = TRUE)`, the maximum value: `r max(pull(penguins, body_mass_g), na.rm = TRUE)`, the mean value: `r mean(pull(penguins, body_mass_g), na.rm = TRUE)`.
+
+* The variable 'year' has the range: [`r range(pull(penguins, year), na.rm = TRUE)`], the minimum value: `r min(pull(penguins, year), na.rm = TRUE)`, the maximum value: `r max(pull(penguins, year), na.rm = TRUE)`.
+
+
+
+### Size of the dataset: 
+The dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns in total.
+The size of the 'penguins' dataset is `r nrow(penguins)` * `r ncol(penguins)`.
+
+
+### Mean flipper length
+The mean of flipper_length_mm is  `r mean(pull(penguins, flipper_length_mm), na.rm = TRUE)`.
+
+### Scatterplot
+Create a data frame containing variables for the plot.
+```{r variables}
+plot_df = tibble(
+    x = pull(penguins, bill_length_mm),
+    y = pull(penguins, flipper_length_mm),
+    species = pull(penguins, species)
+)
+
+```
+
+This is the scatterplot of flipper_length_mm (y) vs bill_length_mm (x).
+```{r scatterplot, warning = FALSE}
+ggplot(plot_df, aes(x = x, y = y, color = species)) + geom_point()
+
+ggsave('scatter_plot.pdf', height = 4, width = 4)
+```
 
 
