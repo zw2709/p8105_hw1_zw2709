@@ -6,8 +6,63 @@ output: github_document
 
 This is the solution to Homework 1
 
+```{r}
+library(tidyverse)
+```
+
+
 # Problem 1
 
+Create a data frame with specified elements:
 
+```{r create_df}
+prob1_df =
+  tibble(
+    samp = rnorm(10),
+    samp_gt_0 = samp >0,
+    char_vec = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+    factor_vec = factor(c("low", "low", "low", "med", "med", "med", "high", "high", "high", "high"))
+  )
+
+```
+
+
+Take the mean of each variable in the data frame
+
+```{r mean_pull-vari}
+mean(pull(prob1_df, samp))
+mean(pull(prob1_df, samp_gt_0))
+mean(pull(prob1_df, char_vec))
+mean(pull(prob1_df, factor_vec))
+
+```
+
+I can take the mean of numbers and logical, but not character or factor.
+
+
+Then use as.numeric function
+```{r try_numeric, eval = FALSE}
+as.numeric(pull(prob1_df, samp))
+as.numeric(pull(prob1_df, samp_gt_0))
+as.numeric(pull(prob1_df, char_vec))
+as.numeric(pull(prob1_df, factor_vec))
+```
+
+We can get results for numbers, logical and even factor, but not for character.
+
+```{r}
+
+as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+as.factor(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+as.numeric(as.factor(pull(prob1_df, samp_gt_0))) * pull(prob1_df, samp)
+
+```
 
 # Problem 2
+
+
+
+
+
+
+
